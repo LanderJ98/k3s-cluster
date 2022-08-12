@@ -2,12 +2,6 @@ resource "oci_core_network_security_group" "public_lb_nsg" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.default_oci_core_vcn.id
   display_name   = "K3s public LB nsg"
-
-  freeform_tags = {
-    "provisioner"           = "terraform"
-    "environment"           = "${var.environment}"
-    "${var.unique_tag_key}" = "${var.unique_tag_value}"
-  }
 }
 
 resource "oci_core_network_security_group_security_rule" "allow_http_from_all" {
@@ -52,12 +46,6 @@ resource "oci_core_network_security_group" "lb_to_instances" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_vcn.default_oci_core_vcn.id
   display_name   = "Public LB to Compute Instances NSG"
-
-  freeform_tags = {
-    "provisioner"           = "terraform"
-    "environment"           = "${var.environment}"
-    "${var.unique_tag_key}" = "${var.unique_tag_value}"
-  }
 }
 
 resource "oci_core_network_security_group_security_rule" "nsg_to_instances_http" {

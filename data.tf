@@ -1,4 +1,14 @@
-data "template_cloudinit_config" "k3s_server_tpl" {
+data "oci_identity_availability_domain" "ad_1" {
+  compartment_id = var.tenancy_ocid
+  ad_number      = 1
+}
+
+data "oci_identity_availability_domain" "ad_2" {
+  compartment_id = var.tenancy_ocid
+  ad_number      = 2
+}
+
+data "cloudinit_config" "k3s_server_tpl" {
   gzip          = true
   base64_encode = true
 
@@ -12,7 +22,7 @@ data "template_cloudinit_config" "k3s_server_tpl" {
       certmanager_release                     = var.certmanager_release,
       certmanager_email_address               = var.certmanager_email_address,
       compartment_ocid                        = var.compartment_ocid,
-      availability_domain                     = var.availability_domain,
+      availability_domain                     = data.oci_identity_availability_domain.ad_2.name,
       k3s_url                                 = oci_load_balancer_load_balancer.k3s_load_balancer.ip_addresses[0],
       k3s_tls_san                             = oci_load_balancer_load_balancer.k3s_load_balancer.ip_addresses[0],
       install_longhorn                        = var.install_longhorn,
@@ -23,7 +33,7 @@ data "template_cloudinit_config" "k3s_server_tpl" {
   }
 }
 
-data "template_cloudinit_config" "k3s_worker_tpl" {
+data "cloudinit_config" "k3s_worker_tpl" {
   gzip          = true
   base64_encode = true
 
@@ -39,27 +49,4 @@ data "template_cloudinit_config" "k3s_worker_tpl" {
       nginx_ingress_controller_https_nodeport = var.nginx_ingress_controller_https_nodeport,
     })
   }
-}
-
-data "oci_core_instance_pool_instances" "k3s_workers_instances" {
-  compartment_id   = var.compartment_ocid
-  instance_pool_id = oci_core_instance_pool.k3s_workers.id
-}
-
-data "oci_core_instance" "k3s_workers_instances_ips" {
-  count       = var.k3s_worker_pool_size
-  instance_id = data.oci_core_instance_pool_instances.k3s_workers_instances.instances[count.index].id
-}
-
-data "oci_core_instance_pool_instances" "k3s_servers_instances" {
-  depends_on = [
-    oci_core_instance_pool.k3s_servers,
-  ]
-  compartment_id   = var.compartment_ocid
-  instance_pool_id = oci_core_instance_pool.k3s_servers.id
-}
-
-data "oci_core_instance" "k3s_servers_instances_ips" {
-  count       = var.k3s_server_pool_size
-  instance_id = data.oci_core_instance_pool_instances.k3s_servers_instances.instances[count.index].id
 }

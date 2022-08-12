@@ -1,25 +1,16 @@
 variable "region" {
   type = string
+  default = "uk-london-1"
 }
 
 variable "availability_domain" {
   type = string
-}
-
-variable "compartment_ocid" {
-  type = string
-}
-
-variable "environment" {
-  type = string
-}
-
-variable "k3s_token" {
-  type = string
+  default = 1
 }
 
 variable "cluster_name" {
   type = string
+  default = "jl-k3s-cluster"
 }
 
 variable "fault_domains" {
@@ -27,20 +18,30 @@ variable "fault_domains" {
   default = ["FAULT-DOMAIN-1", "FAULT-DOMAIN-2", "FAULT-DOMAIN-3"]
 }
 
-variable "PATH_TO_PUBLIC_KEY" {
+variable "public_key" {
   type        = string
   default     = "~/.ssh/id_rsa.pub"
   description = "Path to your public key"
 }
 
-variable "os_image_id" {
+variable "server_os_image_id" {
   type    = string
-  default = "ocid1.image.oc1.eu-zurich-1.aaaaaaaag2uyozo7266bmg26j5ixvi42jhaujso2pddpsigtib6vfnqy5f6q" # Canonical-Ubuntu-20.04-aarch64-2022.01.18-0
+  default = "ocid1.image.oc1.uk-london-1.aaaaaaaa72ynvd4a3boeqxdq7btyjmbrutrqvx42vvqt7iet3sgqtbxk2xma" # Canonical-Ubuntu-20.04-aarch64-2022.01.18-0
 }
 
-variable "compute_shape" {
+variable "server_compute_shape" {
   type    = string
   default = "VM.Standard.A1.Flex"
+}
+
+variable "worker_os_image_id" {
+  type    = string
+  default = "ocid1.image.oc1.uk-london-1.aaaaaaaaihgwj54qo6gzqkaegzgq7xf2ho4cguj5rsue323mdlglqvjiymnq" # Canonical-Ubuntu-20.04-arch64-2022.01.18-0
+}
+
+variable "worker_compute_shape" {
+  type    = string
+  default = "VM.Standard.E2.1.Micro"
 }
 
 variable "public_lb_shape" {
@@ -65,14 +66,14 @@ variable "oci_core_vcn_dns_label" {
   default = "defaultvcn"
 }
 
-variable "oci_core_subnet_dns_label10" {
+variable "oci_core_instance_subnet_dns_label" {
   type    = string
-  default = "defaultsubnet10"
+  default = "instancesubnet"
 }
 
-variable "oci_core_subnet_dns_label11" {
+variable "oci_core_lb_subnet_dns_label" {
   type    = string
-  default = "defaultsubnet11"
+  default = "lbsubnet"
 }
 
 variable "oci_core_vcn_cidr" {
@@ -80,12 +81,12 @@ variable "oci_core_vcn_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "oci_core_subnet_cidr10" {
+variable "oci_core_instance_subnet_cidr" {
   type    = string
   default = "10.0.0.0/24"
 }
 
-variable "oci_core_subnet_cidr11" {
+variable "oci_core_lb_subnet_cidr" {
   type    = string
   default = "10.0.1.0/24"
 }
@@ -135,16 +136,6 @@ variable "k3s_worker_pool_size" {
   default = 2
 }
 
-variable "unique_tag_key" {
-  type    = string
-  default = "k3s-provisioner"
-}
-
-variable "unique_tag_value" {
-  type    = string
-  default = "https://github.com/garutilorenzo/k3s-oci-cluster"
-}
-
 variable "my_public_ip_cidr" {
   type        = string
   description = "My public ip CIDR"
@@ -167,7 +158,6 @@ variable "certmanager_release" {
 
 variable "certmanager_email_address" {
   type    = string
-  default = "changeme@example.com"
 }
 
 variable "install_longhorn" {
