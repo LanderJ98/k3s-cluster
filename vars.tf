@@ -29,9 +29,9 @@ variable "cluster_name" {
   default = "jl-k3s-cluster"
 }
 
-variable "fault_domains" {
-  type    = list(any)
-  default = ["FAULT-DOMAIN-1", "FAULT-DOMAIN-2", "FAULT-DOMAIN-3"]
+variable "fault_domain" {
+  type    = string
+  default = "FAULT-DOMAIN-1"
 }
 
 variable "public_key" {
@@ -200,7 +200,7 @@ variable "install_certmanager" {
 
 variable "certmanager_release" {
   type    = string
-  default = "v1.8.2"
+  default = "v1.9.0"
 }
 
 variable "certmanager_email_address" {
@@ -215,5 +215,5 @@ variable "install_longhorn" {
 
 variable "longhorn_release" {
   type    = string
-  default = "v1.2.3"
+  default = "v1.3.1"
 }

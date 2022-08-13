@@ -1,18 +1,28 @@
-resource "oci_core_instance_pool" "instances" {
-
-  lifecycle {
-    ignore_changes        = [load_balancers, freeform_tags]
-  }
-
-  display_name              = var.display_name
+resource "oci_core_instance" "instance" {
+  count = var.instances
+  display_name              = format("%s-%s", var.display_name, count.index + 1)
   compartment_id            = var.compartment_ocid
-  instance_configuration_id = var.instance_configuration_id
+  availability_domain = var.availability_domain
+  fault_domain       = var.fault_domain
 
-  placement_configurations {
-    availability_domain = var.availability_domain
-    primary_subnet_id   = var.subnet_id
-    fault_domains       = var.fault_domains
+  shape = var.instance_shape
+
+  shape_config {
+     memory_in_gbs = var.memory_in_gbs
+     ocpus = var.ocpus
+  }
+  create_vnic_details {
+    assign_public_ip = true
+    subnet_id        = var.subnet_id
+    nsg_ids = var.nsg_ids != null ? var.nsg_ids : null
   }
 
-  size = var.k3s_instance_pool_size
+  metadata = {
+    "ssh_authorized_keys" = file(var.public_key)
+  }
+
+  source_details {
+    source_id = var.os_image_id
+    source_type = "image"
+  }
 }

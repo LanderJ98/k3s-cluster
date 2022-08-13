@@ -26,6 +26,6 @@ variable "https_lb_port" {
     type = string
 }
 
-variable "instance_pool_id" {
-  type = string
+variable "private_ips" {
+    type = list(string)
 }

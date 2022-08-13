@@ -23,6 +23,6 @@ variable "k3s_instance_pool_size" {
   type        = number
 }
 
-variable "instance_pool_id" {
-  type = string
+variable "private_ips" {
+  type = list(string)
 }

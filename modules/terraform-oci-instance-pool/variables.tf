@@ -6,11 +6,7 @@ variable "compartment_ocid" {
     type = string
 }
 
-variable "instance_configuration_id" {
-    type = string
-}
-
-variable "availability_domain" {
+variable "instances" {
     type = string
 }
 
@@ -18,10 +14,35 @@ variable "subnet_id" {
     type = string
 }
 
-variable "fault_domains" {
-    type = list(string)
+variable "availability_domain" {
+    type = string
 }
 
-variable "k3s_instance_pool_size" {
+variable "fault_domain" {
     type = string
+}
+
+variable "nsg_ids" {
+    type = list(string)
+    default = null
+}
+
+variable "public_key" {
+    type = string
+}
+
+variable "instance_shape" {
+    type = string
+}
+
+variable "memory_in_gbs" {
+  type        = string
+}
+
+variable "ocpus" {
+    type = string
+}
+
+variable "os_image_id" {
+  type        = string
 }

@@ -35,7 +35,7 @@ resource "oci_network_load_balancer_backend" "k3s_http_backend" {
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3s_public_lb.id
   name                     = format("%s:%s", "Network HTTP", var.http_lb_port)
   port                     = var.http_lb_port
-  target_id                = data.oci_core_instance.k3s_workers_instances_ips[count.index].id
+  ip_address                = var.private_ips[count.index]
 }
 
 # HTTPS
@@ -65,5 +65,5 @@ resource "oci_network_load_balancer_backend" "k3s_https_backend" {
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3s_public_lb.id
   name                     = format("%s:%s","Network HTTPS", var.https_lb_port)
   port                     = var.https_lb_port
-  target_id                = data.oci_core_instance.k3s_workers_instances_ips[count.index].id
+  ip_address                = var.private_ips[count.index]
 }
