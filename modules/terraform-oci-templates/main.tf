@@ -1,5 +1,4 @@
-resource "oci_core_instance_configuration" template" {
-
+resource "oci_core_instance_configuration" "template" {
   compartment_id = var.compartment_ocid
   display_name   = var.display_name
 

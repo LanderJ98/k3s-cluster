@@ -40,7 +40,7 @@ variable "memory_in_gbs" {
 }
 
 variable "ocpus" {
-    default = string
+    type = string
 }
 
 variable "os_image_id" {

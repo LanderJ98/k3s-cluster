@@ -25,3 +25,11 @@ variable "oci_core_lb_subnet_dns_label" {
 variable "my_public_ip_cidr" {
     type = string
 }
+
+variable "http_lb_port" {
+  type = string
+}
+
+variable "https_lb_port" {
+  type = string
+}

@@ -15,7 +15,7 @@ resource "oci_load_balancer_load_balancer" "load_balancer" {
 
 resource "oci_load_balancer_listener" "k3s_kube_api_listener" {
   default_backend_set_name = oci_load_balancer_backend_set.k3s_kube_api_backend_set.name
-  load_balancer_id         = oci_load_balancer_load_balancer.k3s_load_balancer.id
+  load_balancer_id         = oci_load_balancer_load_balancer.load_balancer.id
   name                     = "K3s__kube_api_listener"
   port                     = var.kube_api_port
   protocol                 = "TCP"
@@ -26,15 +26,15 @@ resource "oci_load_balancer_backend_set" "k3s_kube_api_backend_set" {
     protocol = "TCP"
     port     = var.kube_api_port
   }
-  load_balancer_id = oci_load_balancer_load_balancer.k3s_load_balancer.id
+  load_balancer_id = oci_load_balancer_load_balancer.load_balancer.id
   name             = "K3s__kube_api_backend_set"
   policy           = "ROUND_ROBIN"
 }
 
 resource "oci_load_balancer_backend" "k3s_kube_api_backend" {
-  count            = var.k3s_server_pool_size
+  count            = var.k3s_instance_pool_size
   backendset_name  = oci_load_balancer_backend_set.k3s_kube_api_backend_set.name
-  ip_address       = var.server_private_ips[count.index].private_ip
-  load_balancer_id = oci_load_balancer_load_balancer.k3s_load_balancer.id
+  ip_address       = data.oci_core_instance.k3s_servers_instances_ips[count.index].private_ip
+  load_balancer_id = oci_load_balancer_load_balancer.load_balancer.id
   port             = var.kube_api_port
 }

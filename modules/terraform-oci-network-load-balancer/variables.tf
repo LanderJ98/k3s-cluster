@@ -18,14 +18,14 @@ variable "http_lb_port" {
     type = string
 }
 
-variable "k3s_server_pool_size" {
+variable "k3s_instance_pool_size" {
     type = number
-}
-
-variable "worker_instances" {
-    type = list(string)
 }
 
 variable "https_lb_port" {
     type = string
+}
+
+variable "instance_pool_id" {
+  type = string
 }

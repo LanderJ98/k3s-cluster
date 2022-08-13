@@ -1,10 +1,10 @@
-resource "oci_core_instance_pool" "intances" {
+resource "oci_core_instance_pool" "instances" {
 
   lifecycle {
     ignore_changes        = [load_balancers, freeform_tags]
   }
 
-  display_name              = var.display_namer
+  display_name              = var.display_name
   compartment_id            = var.compartment_ocid
   instance_configuration_id = var.instance_configuration_id
 
@@ -14,5 +14,5 @@ resource "oci_core_instance_pool" "intances" {
     fault_domains       = var.fault_domains
   }
 
-  size = var.k3s_server_pool_size
+  size = var.k3s_instance_pool_size
 }

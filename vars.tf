@@ -1,11 +1,27 @@
+variable "tenancy_ocid" {
+  type = string
+}
+
+variable "user_ocid" {
+  type = string
+}
+
+variable "private_key_path" {
+  type = string
+}
+
+variable "fingerprint" {
+  type = string
+}
+
 variable "region" {
   type = string
   default = "uk-london-1"
 }
 
-variable "availability_domain" {
+variable "compartment_ocid" {
   type = string
-  default = 1
+  default = "ocid1.compartment.oc1..aaaaaaaap3s7xpddwma2atfzfuzfvsw4bouaadg46yrvhhqfb3ex26jen76q"
 }
 
 variable "cluster_name" {
@@ -22,6 +38,11 @@ variable "public_key" {
   type        = string
   default     = "~/.ssh/id_rsa.pub"
   description = "Path to your public key"
+}
+
+variable "k3s_token" {
+  type = string
+  default = "reG6jI8pU6tLM4svBkTFQtsnKqGtm7HM"
 }
 
 variable "server_os_image_id" {
@@ -44,9 +65,29 @@ variable "worker_compute_shape" {
   default = "VM.Standard.E2.1.Micro"
 }
 
-variable "public_lb_shape" {
+variable "lb_shape" {
   type    = string
   default = "flexible"
+}
+
+variable "server_display_name" {
+  type = string
+  default = "Ubuntu 20.04 k3s servers"
+}
+
+variable "server_template_name" {
+  type = string
+  default = "Ubuntu 20.04 k3s servers configuration"
+}
+
+variable "worker_display_name" {
+  type = string
+  default = "Ubuntu 20.04 k3s workers"
+}
+
+variable "worker_template_name" {
+  type = string
+  default = "Ubuntu 20.04 k3s workers configuration"
 }
 
 variable "oci_identity_dynamic_group_name" {
@@ -106,6 +147,11 @@ variable "public_load_balancer_name" {
   default = "K3s public LB"
 }
 
+variable "k3s_internal_load_balancer_name" {
+  type = string
+  default = "k3s internal api load balancer"
+}
+
 variable "http_lb_port" {
   type    = number
   default = 80
@@ -139,6 +185,7 @@ variable "k3s_worker_pool_size" {
 variable "my_public_ip_cidr" {
   type        = string
   description = "My public ip CIDR"
+  default = "86.20.112.87/32"
 }
 
 variable "install_nginx_ingress" {
@@ -158,6 +205,7 @@ variable "certmanager_release" {
 
 variable "certmanager_email_address" {
   type    = string
+  default = "jl&k8sdev.io"
 }
 
 variable "install_longhorn" {
