@@ -71,6 +71,17 @@ resource "oci_core_default_security_list" "default_security_list" {
       max = 22
     }
   }
+    ingress_security_rules {
+    protocol = 6 # tcp
+    source   = var.my_public_ip_cidr
+
+    description = "Allow kube api from ${var.my_public_ip_cidr}"
+
+    tcp_options {
+      min = 6443
+      max = 6443
+    }
+  }
 
   ingress_security_rules {
     protocol = "all"

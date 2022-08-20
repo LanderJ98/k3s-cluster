@@ -9,7 +9,3 @@ output "public_lb_ip" {
 output "k3s_https_backend_set_name" {
   value = oci_network_load_balancer_backend_set.k3s_https_backend_set.name
 }
-
-output "k3s_http_backend_set_name" {
-  value = oci_network_load_balancer_backend_set.k3s_http_backend_set.name
-}

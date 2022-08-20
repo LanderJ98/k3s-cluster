@@ -87,11 +87,6 @@ spec:
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
   ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: 80
-      nodePort: ${nginx_ingress_controller_http_nodeport}
     - name: https
       port: 443
       protocol: TCP

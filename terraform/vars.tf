@@ -42,7 +42,6 @@ variable "public_key" {
 
 variable "k3s_token" {
   type = string
-  default = "reG6jI8pU6tLM4svBkTFQtsnKqGtm7HM"
 }
 
 variable "server_os_image_id" {
@@ -185,35 +184,4 @@ variable "k3s_worker_pool_size" {
 variable "my_public_ip_cidr" {
   type        = string
   description = "My public ip CIDR"
-  default = "86.20.112.87/32"
-}
-
-variable "install_nginx_ingress" {
-  type    = bool
-  default = true
-}
-
-variable "install_certmanager" {
-  type    = bool
-  default = true
-}
-
-variable "certmanager_release" {
-  type    = string
-  default = "v1.9.0"
-}
-
-variable "certmanager_email_address" {
-  type    = string
-  default = "jl&k8sdev.io"
-}
-
-variable "install_longhorn" {
-  type    = bool
-  default = true
-}
-
-variable "longhorn_release" {
-  type    = string
-  default = "v1.3.1"
 }
