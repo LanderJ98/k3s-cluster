@@ -45,10 +45,12 @@ kubectl apply -f nginx_k3s_config/ingress_controller_service.yaml
 
 Deploy these files:
 
+```shell
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.9.1/cert-manager.yaml
 kubectl apply -f cert_manager/issuer.yaml
 kubectl apply -f cert_manager/prod_issuer.yaml
 kubectl apply -f nginx_k3s_config/nginx_cert_manager_config_map.yaml
+```
 
 You should now be able to go to your public load balancers public IP and see a 404 page not found.
 
