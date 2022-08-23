@@ -14,7 +14,6 @@ Create a tfvars file and put in all your configuration. Then run a plan and appl
 
 ansible-playbook bootstrap.yaml -i inventory/hosts.ini
 
-
 ```
 
 ### Get external access to the cluster
@@ -56,4 +55,5 @@ You should now be able to go to your public load balancers public IP and see a 4
 
 #### Notes
 
-This repo has been forked from https://github.com/garutilorenzo/k3s-oci-cluster.
+This repo was originally forked from https://github.com/garutilorenzo/k3s-oci-cluster.
+Inspiration taken from https://github.com/k3s-io/k3s-ansible
