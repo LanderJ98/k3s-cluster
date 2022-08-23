@@ -9,9 +9,14 @@ spec:
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
   ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: <http_ingress_port> # Using 30080
     - name: https
       port: 443
       protocol: TCP
       targetPort: 443
-      nodePort: 30443
+      nodePort: <https_ingress_port> # Using 30443
   type: NodePort
