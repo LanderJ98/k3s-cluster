@@ -1,0 +1,32 @@
+- name: Set SELinux to disabled state
+  selinux:
+    state: disabled
+  when: ansible_os_family == "RedHat"
+
+- name: Stop and disable firewalld.
+  service:
+    name: firewalld
+    state: stopped
+    enabled: False
+  when: ansible_os_family == "RedHat"
+
+- name: Stop and disable netfilters.
+  service:
+    name: netfilter-persistent
+    state: stopped
+    enabled: False
+  when: ansible_os_family == "Debian"
+
+- name: Enable IPv4 forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    state: present
+    reload: yes
+
+- name: Enable IPv6 forwarding
+  sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: "1"
+    state: present
+    reload: yes
