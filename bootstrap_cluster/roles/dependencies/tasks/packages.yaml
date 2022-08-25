@@ -10,9 +10,8 @@
     state: present
   loop:
     - software-properties-common
-    - jq
     - python3
-    - python3-pip
+    - curl
   when: ansible_os_family == "Debian"
 
 - name: "Update packages RedHat"

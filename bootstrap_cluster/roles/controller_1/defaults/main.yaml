@@ -1,0 +1,3 @@
+ansible_user: root
+server_init_args: >-
+  --cluster-init --write-kubeconfig-mode 644 --node-ip {{ controller_1_private_ip }} --advertise-address {{ controller_1_private_ip }} {{ extra_server_args | default('') }}

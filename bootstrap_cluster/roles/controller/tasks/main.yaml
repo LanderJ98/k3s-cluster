@@ -1,2 +1,0 @@
-- name: "Initialise K3's cluster"
-  command: k3s server {{ server_init_args }}

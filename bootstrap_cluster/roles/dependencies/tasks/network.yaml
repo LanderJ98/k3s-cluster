@@ -10,6 +10,14 @@
     enabled: False
   when: ansible_os_family == "RedHat"
 
+- name: "Stop Netfilters"
+  command: /usr/sbin/netfilter-persistent stop
+  when: ansible_os_family == "Debian"
+
+- name: "Flush Netfilters"
+  command: /usr/sbin/netfilter-persistent flush
+  when: ansible_os_family == "Debian"
+
 - name: Stop and disable netfilters.
   service:
     name: netfilter-persistent

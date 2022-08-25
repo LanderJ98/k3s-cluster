@@ -1,6 +1,11 @@
 # Introduction
 
-Terraform deploying infrastructure for a 4 node k3s cluster using Oracle Cloud Free Tier resources.
+Terraform and Ansible for deploying and provisioning infrastructure for a 4 node k3s cluster using Oracle Cloud Free Tier resources.
+
+Dependencies:  
+- Terraform => 1.x.x
+- Python => 3.6.x
+- Ansible Core => 2.x.x
 
 ## Running the Terraform code.
 
@@ -10,6 +15,10 @@ Create a tfvars file and put in all your configuration. Then run a plan and appl
 
 ## Configuring the K3s cluster
 
+Create a file all.yaml in bootstrap_cluster/inventory/group_vars and populate with all your variables
+Create a hosts.ini file in bootstrap_cluster/inventory and populate with your controller and worker ips.  
+Then run the below
+
 ```shell
 
 ansible-playbook bootstrap.yaml -i inventory/hosts.ini
@@ -18,7 +27,8 @@ ansible-playbook bootstrap.yaml -i inventory/hosts.ini
 
 ### Get external access to the cluster
 
-SCP /etc/rancher/k3s/k3s.yaml to your local machine to ~/.kube/config from controller server 1. Then open ~/.kube/config and change the ip from 127.0.0.1 to controller server 1's public ip.  
+scp ubuntu@<controller_ip>:~/.kube/config ~/.kube/config  
+
 You should then be able to access your cluster by doing:
 
 ```shell
@@ -55,5 +65,5 @@ You should now be able to go to your public load balancers public IP and see a 4
 
 #### Notes
 
-This repo was originally forked from https://github.com/garutilorenzo/k3s-oci-cluster.
-Inspiration taken from https://github.com/k3s-io/k3s-ansible
+This repo was originally forked from https://github.com/garutilorenzo/k3s-oci-cluster.  
+Inspiration taken from https://github.com/k3s-io/k3s-ansible and https://github.com/techno-tim/k3s-ansible
