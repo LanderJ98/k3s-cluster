@@ -1,0 +1,3 @@
+ansible_user: root
+server_init_args: >-
+  --server https://{{ kube_api_lb_ip }}:6443 --write-kubeconfig-mode 644 --node-ip {{ controller_2_private_ip }} --advertise-address {{ controller_2_private_ip }} {{ extra_server_args | default('') }}

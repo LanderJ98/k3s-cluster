@@ -1,0 +1,5 @@
+- name: "Tasks"
+  include_tasks: "{{ item }}"
+  loop:
+    - network.yaml
+    - packages.yaml

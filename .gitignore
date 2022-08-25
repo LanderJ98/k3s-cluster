@@ -41,3 +41,4 @@ terraform.rc
 main.tf_ori
 
 ssl/
+.terraform.lock.hcl

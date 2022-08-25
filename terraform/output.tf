@@ -1,5 +1,5 @@
 output "k3s_lb_url" {
-    value = module.internal_k3s_lb.internal_k3s_lb_url
+    value = module.public_k3s_lb.public_lb_ip
 }
 
 output "lb_ip" {
