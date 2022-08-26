@@ -1,0 +1,15 @@
+[controller1]
+${controller1} ansible_user=${ansible_user}
+
+[contoller_2]
+${controller2} ansible_user=${ansible_user}
+
+[workers]
+%{ for ip in worker_instances ~}
+${ip} ansible_user=${ansible_user}
+%{ endfor ~}
+
+[k3s_cluster:children]
+controller1
+controller2
+workers

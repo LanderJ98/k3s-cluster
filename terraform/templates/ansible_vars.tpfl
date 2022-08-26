@@ -1,0 +1,16 @@
+${yamlencode({
+  k3s_version: "${k3s_version}"
+  ansible_user:"${ansible_user}"
+  systemd_dir: "${systemd_dir}"
+  controller_1_private_ip: "${controller_1_private_ip}"
+  controller_2_private_ip: "${controller_2_private_ip}"
+  kube_api_lb_ip: "${kube_api_lb_ip}"
+  private_ips: "${private_ips}"
+  extra_server_args: "${extra_server_args}"
+  extra_agent_args: "${extra_agent_args}"
+  nginx_dir: "${nginx_dir}"
+  nginx_ingress_controller_https_nodeport:"${nginx_ingress_controller_https_nodeport}"
+  nginx_ingress_controller_http_nodeport: "${nginx_ingress_controller_http_nodeport}"
+  https_lb_port: "${https_lb_port}"
+  http_lb_port: "${http_lb_port}"
+})}

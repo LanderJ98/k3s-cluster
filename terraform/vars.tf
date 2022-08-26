@@ -121,6 +121,14 @@ variable "k3s_internal_load_balancer_name" {
   type = string
 }
 
+variable "nginx_ingress_controller_https_nodeport" {
+  type = number
+}
+
+variable "nginx_ingress_controller_http_nodeport" {
+  type = number
+}
+
 variable "http_lb_port" {
   type    = number
 }
