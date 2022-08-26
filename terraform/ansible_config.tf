@@ -1,5 +1,5 @@
 resource "local_file" "ansible_vars" {
-    content = templatefile("./templates/ansible_vars.tpfl", {
+    content = templatefile("templates/ansible_vars.tpfl", {
         k3s_version = "v1.23.10-rc1%2Bk3s1"
         ansible_user = "ubuntu"
         systemd_dir = "/etc/systemd/system"
@@ -20,7 +20,7 @@ resource "local_file" "ansible_vars" {
 }
 
 resource "local_file" "hosts" {
-  content = templatefile("./templates/hosts.ini.tpfl", {
+  content = templatefile("templates/hosts.ini.tpfl", {
     controller1 = module.server_instances.public_ips[0]
     controller2 = module.server_instances.public_ips[1]
     worker_instances = module.worker_instances.public_ips

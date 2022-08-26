@@ -46,4 +46,4 @@ ssl/
 # Ansible
 
 bootstrap_cluster/inventory/hosts.ini
-bootstrap/inventory/group_vars/*.yaml
+bootstrap_cluster/inventory/group_vars/*.yaml
