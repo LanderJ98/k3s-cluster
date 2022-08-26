@@ -42,3 +42,8 @@ main.tf_ori
 
 ssl/
 .terraform.lock.hcl
+
+# Ansible
+
+bootstrap_cluster/inventory/hosts.ini
+bootstrap_cluster/inventory/group_vars/*.yaml
