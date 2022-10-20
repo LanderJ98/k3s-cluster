@@ -7,7 +7,7 @@ workflows:
 
 jobs:
   tf:
-    working_directory: ./terraform
+    working_directory: ~/project/terraform
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
