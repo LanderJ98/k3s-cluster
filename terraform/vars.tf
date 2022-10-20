@@ -129,7 +129,7 @@ variable "oci_core_lb_subnet_cidr" {
 
 variable "kube_api_port" {
   type    = number
-  default = "K3s public LB"
+  default = 6443
 }
 
 variable "public_load_balancer_name" {
