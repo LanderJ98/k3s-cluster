@@ -7,11 +7,16 @@ workflows:
 
 jobs:
   tf:
-    working_directory: ~/project/terraform
+    working_directory: ~/repo
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
+      - run:
+          name: Debug
+          command: :
+            ls -la
+            pwd
       - run:
           name: terraform init and plan
           command: | 
