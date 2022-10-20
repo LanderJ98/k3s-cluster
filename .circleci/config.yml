@@ -12,7 +12,7 @@ jobs:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     steps:
       - checkout
-          path: ~/repo
+            path: ~/repo
       - run:
           name: Debug
           command: |
