@@ -71,7 +71,7 @@ resource "oci_core_default_security_list" "default_security_list" {
       max = 22
     }
   }
-    ingress_security_rules {
+  ingress_security_rules {
     protocol = 6 # tcp
     source   = var.my_public_ip_cidr
 

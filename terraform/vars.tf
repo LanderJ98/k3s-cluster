@@ -6,8 +6,9 @@ variable "user_ocid" {
   type = string
 }
 
-variable "private_key" {
-  type = string
+variable "private_key_path" {
+  type    = string
+  default = "~/.ssh/oci.pem"
 }
 
 variable "fingerprint" {
@@ -15,29 +16,29 @@ variable "fingerprint" {
 }
 
 variable "region" {
-  type = string
-  default =  "uk-london-1"
+  type    = string
+  default = "uk-london-1"
 }
 
 variable "compartment_ocid" {
-  type = string
+  type    = string
   default = "ocid1.compartment.oc1..aaaaaaaap3s7xpddwma2atfzfuzfvsw4bouaadg46yrvhhqfb3ex26jen76q"
 }
 
 variable "cluster_name" {
-  type = string
+  type    = string
   default = "jl-k3s-cluster"
 }
 
 variable "fault_domain" {
   type    = string
-  default = "FAULT-DOMAIN-1" 
+  default = "FAULT-DOMAIN-1"
 }
 
 variable "public_key" {
   type        = string
   description = "Path to your public key"
-  default = "~/.ssh/id_rsa.pub"
+  default     = "~/.ssh/id_rsa.pub"
 }
 
 variable "server_os_image_id" {
@@ -52,7 +53,7 @@ variable "server_compute_shape" {
 
 variable "worker_os_image_id" {
   type    = string
-  default =  "ocid1.image.oc1.uk-london-1.aaaaaaaaihgwj54qo6gzqkaegzgq7xf2ho4cguj5rsue323mdlglqvjiymnq"
+  default = "ocid1.image.oc1.uk-london-1.aaaaaaaaihgwj54qo6gzqkaegzgq7xf2ho4cguj5rsue323mdlglqvjiymnq"
 }
 
 variable "worker_compute_shape" {
@@ -62,39 +63,39 @@ variable "worker_compute_shape" {
 
 variable "lb_shape" {
   type    = string
-  default =  "flexible"
+  default = "flexible"
 }
 
 variable "server_display_name" {
-  type = string
+  type    = string
   default = "Ubuntu 20.04 k3s servers"
 }
 
 variable "server_template_name" {
-  type = string
+  type    = string
   default = "Ubuntu 20.04 k3s servers configuration"
 }
 
 variable "worker_display_name" {
-  type = string
+  type    = string
   default = "Ubuntu 20.04 k3s workers"
 }
 
 variable "worker_template_name" {
-  type = string
+  type    = string
   default = "Ubuntu 20.04 k3s workers configuration"
 }
 
 variable "oci_identity_dynamic_group_name" {
   type        = string
   description = "Dynamic group which contains all instance in this compartment"
-  default =  "Compute_Dynamic_Group"
+  default     = "Compute_Dynamic_Group"
 }
 
 variable "oci_identity_policy_name" {
   type        = string
   description = "Policy to allow dynamic group, to read OCI api without auth"
-  default = "Compute_To_Oci_Api_Policy"
+  default     = "Compute_To_Oci_Api_Policy"
 }
 
 variable "oci_core_vcn_dns_label" {
@@ -114,7 +115,7 @@ variable "oci_core_lb_subnet_dns_label" {
 
 variable "oci_core_vcn_cidr" {
   type    = string
-  default =  "10.0.0.0/16"
+  default = "10.0.0.0/16"
 }
 
 variable "oci_core_instance_subnet_cidr" {
@@ -138,17 +139,17 @@ variable "public_load_balancer_name" {
 }
 
 variable "k3s_internal_load_balancer_name" {
-  type = string
-  default =  "k3s internal api load balancer"
+  type    = string
+  default = "k3s internal api load balancer"
 }
 
 variable "nginx_ingress_controller_https_nodeport" {
-  type = number
+  type    = number
   default = 30443
 }
 
 variable "nginx_ingress_controller_http_nodeport" {
-  type = number
+  type    = number
   default = 30080
 }
 

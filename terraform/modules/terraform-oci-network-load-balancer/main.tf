@@ -35,7 +35,7 @@ resource "oci_network_load_balancer_backend" "k3s_http_backend" {
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3s_public_lb.id
   name                     = format("%s:%s-%s", "Network HTTP", var.http_lb_port, count.index + 1)
   port                     = var.http_lb_port
-  ip_address                = var.private_ips[count.index]
+  ip_address               = var.private_ips[count.index]
 }
 
 # HTTPS
@@ -63,7 +63,7 @@ resource "oci_network_load_balancer_backend" "k3s_https_backend" {
   count                    = var.k3s_instance_pool_size
   backend_set_name         = oci_network_load_balancer_backend_set.k3s_https_backend_set.name
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3s_public_lb.id
-  name                     = format("%s:%s-%s","Network HTTPS", var.https_lb_port, count.index+1)
+  name                     = format("%s:%s-%s", "Network HTTPS", var.https_lb_port, count.index + 1)
   port                     = var.https_lb_port
-  ip_address                = var.private_ips[count.index]
+  ip_address               = var.private_ips[count.index]
 }

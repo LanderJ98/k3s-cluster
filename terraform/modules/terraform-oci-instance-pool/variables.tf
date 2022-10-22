@@ -1,48 +1,48 @@
 variable "display_name" {
-    type = string
+  type = string
 }
 
 variable "compartment_ocid" {
-    type = string
+  type = string
 }
 
 variable "instances" {
-    type = string
+  type = string
 }
 
 variable "subnet_id" {
-    type = string
+  type = string
 }
 
 variable "availability_domain" {
-    type = string
+  type = string
 }
 
 variable "fault_domain" {
-    type = string
+  type = string
 }
 
 variable "nsg_ids" {
-    type = list(string)
-    default = null
+  type    = list(string)
+  default = null
 }
 
 variable "public_key" {
-    type = string
+  type = string
 }
 
 variable "instance_shape" {
-    type = string
+  type = string
 }
 
 variable "memory_in_gbs" {
-  type        = string
+  type = string
 }
 
 variable "ocpus" {
-    type = string
+  type = string
 }
 
 variable "os_image_id" {
-  type        = string
+  type = string
 }
