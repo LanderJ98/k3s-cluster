@@ -5,10 +5,7 @@ terraform {
       version = ">= 4.86.0"
     }
   }
-  # backend "http" {
-  #   address = "https://objectstorage.uk-london-1.oraclecloud.com/p/wa-KNtnUGXIu7SFZf7B-pgprWwfQEVhfIK4QGBIPbvSZeed-BSe-5eBOky-h2Kws/n/lrf1h4bvm7lg/b/oci-tf-state/o/terraform.tfstate"
-  #   update_method = "PUT"
-  # }
+
   backend "azurerm" {
     resource_group_name  = "RG-TF-STATE"
     storage_account_name = "azjltfstate"
