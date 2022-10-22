@@ -1,6 +1,17 @@
-FROM hashicorp/terraform
+FROM --platform=linux/amd64 ubuntu:20.04
+ARG TF_VERSION=1.2.9
+ARG INSTANCE_SSH_PUBLIC_KEY
 
-RUN apk add py3-pip
-RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo make
-RUN pip install --upgrade pip
-RUN pip install azure-cli
+RUN apt-get -y update && apt-get -y upgrade
+
+RUN apt install -y wget unzip curl
+
+# Install terraform
+RUN wget https://releases.hashicorp.com/terraform/$TF_VERSION/terraform_${TF_VERSION}_linux_amd64.zip \
+    && unzip terraform_${TF_VERSION}_linux_amd64.zip \
+    && mv terraform /usr/local/bin
+
+# Install Azure cli
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+RUN mkdir ~/.ssh
+RUN echo "$INSTANCE_SSH_PUBLIC_KEY" > ~/.ssh/id_rsa.pub && chmod 644 ~/.ssh/id_rsa.pub

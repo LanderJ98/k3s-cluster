@@ -10,7 +10,7 @@ jobs:
   tf:
     working_directory: ~/repo/terraform
     docker:
-      - image: jl98/default:v1.0.0
+      - image: jl98/default:v1.0.3
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
