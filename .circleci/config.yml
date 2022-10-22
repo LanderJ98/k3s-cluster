@@ -13,11 +13,7 @@ jobs:
       TF_VAR_tenancy_ocid: $TENANCY_OCID
       TF_VAR_user_ocid: $OCI_USER_ID
       TF_VAR_private_key: $OCI_PRIVATE_KEY
-      TF_VAR_fingerprint: $OCI_FINGERPRINT 
-      ARM_CLIENT_ID: $AZURE_SP
-      ARM_CLIENT_SECRET: $AZURE_SP_PASSWORD  
-      ARM_SUBSCRIPTION_ID: $AZURE_SP_SUBSCRIPTION
-      ARM_TENANT_ID: $AZURE_SP_TENANT   
+      TF_VAR_fingerprint: $OCI_FINGERPRINT      
     docker:
       - image: jl98/default:v1.0.3
         auth:
@@ -38,10 +34,10 @@ jobs:
       - run:
           name: terraform init
           command: | 
-            # export ARM_CLIENT_ID=$AZURE_SP
-            # export ARM_CLIENT_SECRET=$AZURE_SP_PASSWORD
-            # export ARM_SUBSCRIPTION_ID=$AZURE_SP_SUBSCRIPTION
-            # export ARM_TENANT_ID=$AZURE_SP_TENANT
+            export ARM_CLIENT_ID=$AZURE_SP
+            export ARM_CLIENT_SECRET=$AZURE_SP_PASSWORD
+            export ARM_SUBSCRIPTION_ID=$AZURE_SP_SUBSCRIPTION
+            export ARM_TENANT_ID=$AZURE_SP_TENANT
             terraform init 
       - run:
           name: terraform validate
@@ -50,5 +46,9 @@ jobs:
 
       - run:
           name: terraform plan
-          command: | 
+          command: |
+            export ARM_CLIENT_ID=$AZURE_SP
+            export ARM_CLIENT_SECRET=$AZURE_SP_PASSWORD
+            export ARM_SUBSCRIPTION_ID=$AZURE_SP_SUBSCRIPTION
+            export ARM_TENANT_ID=$AZURE_SP_TENANT 
             terraform plan -var my_public_ip_cidr=$PUBLIC_IP 
