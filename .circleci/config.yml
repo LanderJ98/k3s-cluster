@@ -1,15 +1,19 @@
 version: 2.1
 
+
 workflows:
-  test-env-vars:
+  plan-and-deploy:
     jobs:
-      - tf
+      - tf:
 
 jobs:
   tf:
     working_directory: ~/repo/terraform
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: jl98/default:v1.0.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout:
           path: ~/repo
@@ -19,10 +23,16 @@ jobs:
             ls -la
             pwd
       - run:
-          name: terraform init and plan
+          name: Az CLI Login
+          command: |
+            az login \
+          --service-principal \
+          --tenant $AZURE_SP_TENANT \
+          -u $AZURE_SP \
+          -p $AZURE_SP_PASSWORD
+      - run:
+          name: terraform init
           command: | 
-            export TF_HTTP_ADDRESS=$BACKEND_HTTP
-            export TF_HTTP_UPDATE_METHOD=$BACKEND_METHOD
             terraform init
           environment:
             TF_VAR_tenancy_ocid: $TENANCY_OCID
